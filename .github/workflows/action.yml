@@ -48,3 +48,31 @@ jobs:
           file: build/docker/spark-base/Dockerfile
           push: true
           tags: padzx/spark_base:latest
+      
+      - name: Extract metadata for Docker Spark-Master-Image
+        id: meta_spark-master
+        uses: docker/metadata-action@v2
+        with:
+          images: padzx/master_spark
+      
+      - name: Build and push Docker Spark-Master-Image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: build/docker/spark-master/Dockerfile
+          push: true
+          tags: padzx/master_spark:latest
+
+      - name: Extract metadata for Docker Spark-Master-Image
+        id: meta_spark-worker
+        uses: docker/metadata-action@v2
+        with:
+          images: padzx/worker_spark
+      
+      - name: Build and push Docker Spark-Worker-Image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: build/docker/spark-worker/Dockerfile
+          push: true
+          tags: padzx/worker_spark:latest
