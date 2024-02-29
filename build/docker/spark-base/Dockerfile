@@ -20,7 +20,7 @@ RUN curl -L https://archive.apache.org/dist/spark/spark-3.5.0/spark-3.5.0-bin-ha
     rm spark.tgz
 
 # Copy PostgreSQL JDBC Driver to Spark JARs directory
-COPY build/drivers/postgresql-42.7.1.jar /usr/bin/spark/jars/
+COPY build/drivers/postgresql-42.7.2.jar /usr/bin/spark/jars/
 
 # Set environment variables
 ENV SPARK_HOME /usr/bin/spark
