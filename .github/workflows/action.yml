@@ -30,8 +30,22 @@ jobs:
           push: true
           tags: padzx/jdk_base:latest
 
-      - name: Extract metadata for Docker Spark-Image
+      - name: Extract metadata for Docker JDK-Image
         id: meta_spark
         uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
         with:
           images: padzx/jdk_base
+
+      - name: Extract metadata for Docker Spark-Image
+        id: meta_spark
+        uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
+        with:
+          images: padzx/spark_base
+
+      - name: Build and push Docker Spark-Image
+        uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
+        with:
+          context: .
+          file: build/docker/spark-base/Dockerfile
+          push: true
+          tags: padzx/spark_base:latest
