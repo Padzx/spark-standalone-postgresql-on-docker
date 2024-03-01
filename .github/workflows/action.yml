@@ -76,3 +76,11 @@ jobs:
           file: build/docker/spark-worker/Dockerfile
           push: true
           tags: padzx/worker_spark:latest
+
+      
+      - name: Verifying Variables of Spark Enviroments 
+        run: |
+          echo "SPARK_HOME: $SPARK_HOME"
+          echo "SPARK_MASTER_HOST: $SPARK_MASTER_HOST"
+          echo "SPARK_MASTER_PORT: $SPARK_MASTER_PORT"
+          echo "PYSPARK_PYTHON: $PYSPARK_PYTHON"
