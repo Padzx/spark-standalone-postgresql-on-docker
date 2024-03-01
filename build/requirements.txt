@@ -3,8 +3,6 @@ plotly
 pandas
 matplotlib
 psycopg2-binary
-pyspark
-findspark
 numpy
 scikit-learn
 tensorflow

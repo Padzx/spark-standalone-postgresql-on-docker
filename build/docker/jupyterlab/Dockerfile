@@ -11,9 +11,37 @@ LABEL org.label-schema.description="Jupyterlab Image"
 LABEL org.label-schema.url="https://github.com/Padzx/spark-standalone-postgresql-on-docker"
 LABEL org.label-schema.schema-version="1.0"
 
-# Instal JAVA
+# Install JAVA 
+RUN apt-get update && apt-get install -y default-jre
 
-RUN apt-get update && apt-get install -y defaullt-jre
+# COPY requirements.txt and install dependencies
+COPY build/requirements.txt /app/requirements.txt
+RUN pip3 install --no-cache-dir -r /app/requirements.txt
 
-# Instal Python and required packages
-RUN apt-get install -y pytohn3 python3-pip && 
+# Install Python and required packages
+RUN apt-get install -y python3 python3-pip && \
+    pip3 install jupyterlab findspark
+
+# Set environment variables
+ENV SPARK_HOME /usr/local/lib/python3.9/site-packages/pyspark
+ENV PATH $SPARK_HOME/bin:$PATH
+
+# Install PySpark
+RUN pip3 install pyspark
+
+# Configure PySpark environment
+ENV PYSPARK_PYTHON python3
+ENV PYSPARK_DRIVER_PYTHON jupyter
+ENV PYSPARK_DRIVER_PYTHON_OPTS "lab --ip=0.0.0.0 --port=8888 --allow-root"
+
+# Create Python kernel for PySpark
+RUN python3 -m ipykernel install --user --name=python3 --display-name="PySpark"
+
+# Expose JupyterLab port
+EXPOSE 8888
+
+# Defaul dir
+WORKDIR /app
+
+# Start JupyterLab
+CMD ["jupyter", "lab"]
