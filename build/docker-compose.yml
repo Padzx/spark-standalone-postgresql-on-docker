@@ -1,0 +1,26 @@
+version: "3"
+
+services:
+  spark-master:
+    container_name: spark-master
+    image: padzx/spark-master:latest
+    ports:
+      - 8080:8080 
+      - 7077:7077
+    environment:
+      SPARK_MODE: master  # Corrigido para a sintaxe correta
+    networks:
+      - spark-network
+
+  spark-worker:
+    container_name: spark-worker
+    image: padzx/spark-worker:latest
+    environment:
+      SPARK_MODE: worker  # Corrigido para a sintaxe correta
+      SPARK_MASTER_ADDRESS: spark-master:7077
+    networks:
+      - spark-network
+
+networks:
+  spark-network:
+    driver: bridge
