@@ -1,4 +1,4 @@
-name: Publish OpenJdk-Image & Spark and Clusters
+name: Publish OpenJdk-Image & Spark and Clusters & JupyterLab
 
 on:
   release:
@@ -76,6 +76,22 @@ jobs:
           file: build/docker/spark-worker/Dockerfile
           push: true
           tags: padzx/worker_spark:latest
+      
+
+      - name: Extract metadata for Docker JupyterLab-Image
+        id: meta_jupyterlab
+        uses: docker/metadata-action@v2
+        with:
+          images: padzx/jupyter_lab
+
+
+      - name: Build and Push Docker JupyterLab-Image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: build/docker/jupyterlab/Dockerfile
+          push: true
+          tags: padzx/jupyter_lab:latest
 
       
       - name: Verifying Variables of Spark Enviroments 
