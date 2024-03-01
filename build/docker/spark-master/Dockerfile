@@ -1,5 +1,5 @@
 FROM padzx/spark_base:latest
-LABEL manteiner="Gabriel Padilha <gabriel.padzx@outlook.com>"
+LABEL maintainer="Gabriel Padilha <gabriel.padzx@outlook.com>"
 
 # -- Metadatas
 
