@@ -35,5 +35,5 @@ EXPOSE 8888
 # Default directory
 WORKDIR /app
 
-# Start JupyterLab
-CMD ["jupyter", "lab"]
+# Start JupyterLab with --allow-root
+CMD ["jupyter", "lab", "--allow-root"]
