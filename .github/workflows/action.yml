@@ -12,8 +12,8 @@ jobs:
     name: Build and Push Docker JupyterLab-Image
     runs-on: ubuntu-latest
     env:
-      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-      DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      DOCKER_USERNAME: ${{ secrets.DOCKER_USR }}
+      DOCKER_PASSWORD: ${{ secrets.DOCKER_PWD }}
     steps:
       - name: Check out the repo
         uses: actions/checkout@v2
