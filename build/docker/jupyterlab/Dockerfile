@@ -17,7 +17,7 @@ RUN apt-get update && apt-get install -y default-jre
 RUN apt-get install -y python3 python3-pip && \
     pip3 install --no-cache-dir jupyterlab findspark dash plotly pandas matplotlib psycopg2-binary pyspark numpy scikit-learn tensorflow
 
-# Set environment variables
+# Set environment variables for Spark
 ENV SPARK_HOME /usr/local/spark
 ENV PATH $SPARK_HOME/bin:$PATH
 
@@ -25,6 +25,9 @@ ENV PATH $SPARK_HOME/bin:$PATH
 ENV PYSPARK_PYTHON python3
 ENV PYSPARK_DRIVER_PYTHON jupyter
 ENV PYSPARK_DRIVER_PYTHON_OPTS "lab --ip=0.0.0.0 --port=8888 --allow-root"
+
+# Copy Spark binaries from Spark image
+COPY --from=padzx/spark-master:latest /usr/bin/spark /usr/local/spark
 
 # Create Python kernel for PySpark
 RUN python3 -m ipykernel install --user --name=python3 --display-name="PySpark"

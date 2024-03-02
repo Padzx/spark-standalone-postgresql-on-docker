@@ -6,7 +6,11 @@ services:
     image: padzx/jupyter_lab:latest
     ports:
       - 8888:8888
-      
+    volumes:
+      - shared-workspace:/opt/workspace
+    networks:
+      - spark-network
+
   spark-master:
     container_name: spark-master
     image: padzx/spark-master:latest
@@ -17,6 +21,8 @@ services:
       SPARK_MODE: master
     networks:
       - spark-network
+    volumes:
+      - shared-workspace:/usr/bin/spark/data
 
   spark-worker:
     container_name: spark-worker
@@ -26,7 +32,12 @@ services:
       SPARK_MASTER_ADDRESS: spark-master:7077
     networks:
       - spark-network
+    volumes:
+      - shared-workspace:/usr/bin/spark/data
 
 networks:
   spark-network:
     driver: bridge
+
+volumes:
+  shared-workspace:
