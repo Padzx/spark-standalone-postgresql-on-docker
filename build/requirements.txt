@@ -1,9 +1,0 @@
-dash
-plotly
-pandas
-matplotlib
-psycopg2-binary
-numpy
-scikit-learn
-tensorflow
-html
