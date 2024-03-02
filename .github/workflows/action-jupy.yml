@@ -1,0 +1,30 @@
+name: Publish JupyterLab Image 
+
+on:
+  release:
+    types: [published]
+  push:
+    branches:
+      - main
+
+jobs:
+  build_and_push_image:
+    name: Build and Push Docker JupyterLab-Image
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v2
+
+      - name: Extract metadata for Docker JupyterLab-Image
+        id: meta_jupyterlab
+        uses: docker/metadata-action@v2
+        with:
+          images: padzx/jupyter_lab
+
+      - name: Build and Push Docker JupyterLab-Image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: build/docker/jupyterlab/Dockerfile
+          push: true
+          tags: padzx/jupyter_lab:latest
