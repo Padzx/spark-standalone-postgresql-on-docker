@@ -21,8 +21,6 @@ RUN apt-get install -y python3 python3-pip && \
 ENV SPARK_HOME /usr/local/spark
 ENV PATH $SPARK_HOME/bin:$PATH
 
-# Install Pypsar
-
 # Configure PySpark environment
 ENV PYSPARK_PYTHON python3
 ENV PYSPARK_DRIVER_PYTHON jupyter
@@ -38,4 +36,4 @@ EXPOSE 8888
 WORKDIR /app
 
 # Start JupyterLab with --allow-root
-CMD ["jupyter", "lab", "--allow-root"]
+CMD ["jupyter", "lab", "--ip=0.0.0.0", "--port=8888", "--allow-root"]
