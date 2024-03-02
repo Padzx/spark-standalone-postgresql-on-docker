@@ -1,4 +1,4 @@
-name: Publish OpenJdk-Image & Spark and Clusters & JupyterLab
+name: Publish OpenJdk-Image & Spark and Clusters
 
 on:
   release:
