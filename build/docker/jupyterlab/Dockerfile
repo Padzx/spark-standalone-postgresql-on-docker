@@ -18,8 +18,10 @@ RUN apt-get install -y python3 python3-pip && \
     pip3 install --no-cache-dir jupyterlab findspark dash plotly pandas matplotlib psycopg2-binary pyspark numpy scikit-learn tensorflow
 
 # Set environment variables
-ENV SPARK_HOME /usr/local/lib/python3.9/site-packages/pyspark
+ENV SPARK_HOME /usr/local/spark
 ENV PATH $SPARK_HOME/bin:$PATH
+
+# Install Pypsar
 
 # Configure PySpark environment
 ENV PYSPARK_PYTHON python3

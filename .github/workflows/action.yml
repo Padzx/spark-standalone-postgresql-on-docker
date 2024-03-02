@@ -1,5 +1,4 @@
-#
-name: Publish OpenJdk-Image & Spark and Clusters
+name: Publish JupyterLab Image 
 
 on:
   release:
@@ -9,82 +8,18 @@ on:
       - main
 
 jobs:
-  push_to_registry:
-    name: Push Docker OpenJdk-Image to Docker Hub
+  build_and_push_image:
+    name: Build and Push Docker JupyterLab-Image
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repo
         uses: actions/checkout@v2
-
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKERHUB_USR }}
-          password: ${{ secrets.DOCKERHUB_PWD }}
-
-      - name: Build and push Docker OpenJdk-Image
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          file: build/docker/base/Dockerfile
-          push: true
-          tags: padzx/jdk_base:latest
-
-      - name: Extract metadata for Docker JDK-Image
-        id: meta_jdk
-        uses: docker/metadata-action@v2
-        with:
-          images: padzx/jdk_base
-
-      - name: Extract metadata for Docker Spark-Image
-        id: meta_spark
-        uses: docker/metadata-action@v2
-        with:
-          images: padzx/spark_base
-
-      - name: Build and push Docker Spark-Image
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          file: build/docker/spark-base/Dockerfile
-          push: true
-          tags: padzx/spark_base:latest
-      
-      - name: Extract metadata for Docker Spark-Master-Image
-        id: meta_spark-master
-        uses: docker/metadata-action@v2
-        with:
-          images: padzx/master_spark
-      
-      - name: Build and push Docker Spark-Master-Image
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          file: build/docker/spark-master/Dockerfile
-          push: true
-          tags: padzx/master_spark:latest
-
-      - name: Extract metadata for Docker Spark-Master-Image
-        id: meta_spark-worker
-        uses: docker/metadata-action@v2
-        with:
-          images: padzx/worker_spark
-      
-      - name: Build and push Docker Spark-Worker-Image
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          file: build/docker/spark-worker/Dockerfile
-          push: true
-          tags: padzx/worker_spark:latest
-      
 
       - name: Extract metadata for Docker JupyterLab-Image
         id: meta_jupyterlab
         uses: docker/metadata-action@v2
         with:
           images: padzx/jupyter_lab
-
 
       - name: Build and Push Docker JupyterLab-Image
         uses: docker/build-push-action@v2
@@ -93,11 +28,3 @@ jobs:
           file: build/docker/jupyterlab/Dockerfile
           push: true
           tags: padzx/jupyter_lab:latest
-
-      
-      - name: Verifying Variables of Spark Enviroments 
-        run: |
-          echo "SPARK_HOME: $SPARK_HOME"
-          echo "SPARK_MASTER_HOST: $SPARK_MASTER_HOST"
-          echo "SPARK_MASTER_PORT: $SPARK_MASTER_PORT"
-          echo "PYSPARK_PYTHON: $PYSPARK_PYTHON"
