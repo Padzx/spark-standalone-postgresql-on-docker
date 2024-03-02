@@ -8,29 +8,29 @@ on:
       - main
 
 jobs:
-  build_and_push_image:
-    name: Build and Push Docker JupyterLab-Image
+  push_to_registry:
+    name: Push Docker JupyterLab Image to Docker Hub
     runs-on: ubuntu-latest
-    env:
-      DOCKER_USERNAME: ${{ secrets.DOCKER_USR }}
-      DOCKER_PASSWORD: ${{ secrets.DOCKER_PWD }}
     steps:
       - name: Check out the repo
         uses: actions/checkout@v2
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
-
-      - name: Extract metadata for Docker JupyterLab-Image
-        id: meta_jupyterlab
-        uses: docker/metadata-action@v2
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
         with:
-          images: padzx/jupyter_lab
-
-      - name: Build and Push Docker JupyterLab-Image
+          username: ${{ secrets.DOCKERHUB_USR }}
+          password: ${{ secrets.DOCKERHUB_PWD }}
+      
+      - name: Build and push Docker JupyterLab-Image
         uses: docker/build-push-action@v2
         with:
           context: .
           file: build/docker/jupyterlab/Dockerfile
           push: true
           tags: padzx/jupyter_lab:latest
+
+      - name: Extract metadata for Docker JupyerLab-Image
+        id: meta_jupyterlab
+        uses: docker/metadata-action@v2
+        with:
+          images: padzx/jupyter_lab
