@@ -29,7 +29,7 @@ jobs:
           push: true
           tags: padzx/postgresql:latest
 
-      - name: Extract metadata for Docker JupyerLab-Image
+      - name: Extract metadata for Docker Postgresql-Image
         id: meta_postgresql
         uses: docker/metadata-action@v2
         with:
