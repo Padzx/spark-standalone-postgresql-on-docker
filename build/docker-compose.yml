@@ -35,9 +35,22 @@ services:
     volumes:
       - shared-workspace:/usr/bin/spark/data
 
+  postgresql:
+    container_name: postgresql
+    image: padzx/postgresql:latest
+    environment:
+      POSTGRES_PASSWORD: "postgres"
+    ports:
+      - 5432:5432
+    volumes:
+      - postgresql-data:/var/lib/postgresql/data
+    networks:
+      - spark-network
+
 networks:
   spark-network:
     driver: bridge
 
 volumes:
   shared-workspace:
+  postgresql-data:
