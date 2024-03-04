@@ -1,0 +1,59 @@
+version: "3.8"
+
+services:
+  jupyterlab:
+    container_name: jupyterlab
+    image: padzx/jupyter_lab:latest
+    ports:
+      - 8888:8888
+    volumes:
+      - shared-workspace:/opt/workspace
+    networks:
+      - spark-network
+
+  spark-master:
+    container_name: spark-master
+    image: padzx/spark-master:latest
+    ports:
+      - 8080:8080 
+      - 7077:7077
+    environment:
+      SPARK_MODE: master
+    networks:
+      - spark-network
+    volumes:
+      - shared-workspace:/usr/bin/spark/data
+
+  spark-worker:
+    container_name: spark-worker
+    image: padzx/spark-worker:latest
+    environment:
+      SPARK_MODE: worker
+      SPARK_MASTER_ADDRESS: spark-master:7077
+    networks:
+      - spark-network
+    volumes:
+      - shared-workspace:/usr/bin/spark/data
+
+  postgresql:
+    container_name: postgresql
+    image: padzx/postgresql:latest
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: "postgres"
+      POSTGRES_HOST_AUTH_METHOD: trust
+    ports:
+      - 5432:5432
+    volumes:
+      - postgresql-data:/var/lib/postgresql/data
+    networks:
+      - spark-network
+
+networks:
+  spark-network:
+    driver: bridge
+
+volumes:
+  shared-workspace:
+  postgresql-data:
