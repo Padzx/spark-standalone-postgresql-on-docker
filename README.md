@@ -84,12 +84,28 @@ docker-compose up -d
 ```
 
 
+## Overview Application 
 
 
+| Application|Connection|Desciption|
+|-------|-------|------|
+| JupyterLab|localhost:8888|Interface Application Jupyter Notebook|
+| PostgreSQL|5432 port|Database PostgreSQL running default port|
+| Spark Master|localhost:8080|Spark Master Node|
+|Spark Worker|localhost:7077|Spark Worker Node
 
 
+## Tech Stack
 
+- Infra
 
+|Component|Version|
+|---------|-------|
+Docker Engine|24.0.5+|
+Docker-Compose|1.29.2+|
 
+- Languages and Kernels
 
+|Spark|Hadoop|Python|Python Kernel|
+|-----|------|------|------------|
 
