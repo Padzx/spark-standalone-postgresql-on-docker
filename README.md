@@ -104,8 +104,11 @@ docker-compose up -d
 Docker Engine|24.0.5+|
 Docker-Compose|1.29.2+|
 
-- Languages and Kernels
+- Languages and Kernels (Versions)
 
-|Spark|Hadoop|Python|Python Kernel|
-|-----|------|------|------------|
+| Spark | Hadoop | Python | Pyspark |
+|-------|--------|--------|---------|
+| 3.5.1 | 3.3.6  | 3.9.2  |  3.5.1  |
 
+
+## How Connect to Database PostgreSQL with Jupyter Lab (Spark Session)
