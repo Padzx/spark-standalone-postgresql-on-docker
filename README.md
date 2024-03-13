@@ -3,8 +3,8 @@
 ## Summary 
 
 - [Introduction](#introduction)
-- [Seção 2](#seção-2)
-- [Seção 3](#seção-3)
+- [Connection PostgreSQL](#connection)
+
 
 ## Introduction
 
@@ -111,4 +111,10 @@ Docker-Compose|1.29.2+|
 | 3.5.1 | 3.3.6  | 3.9.2  |  3.5.1  |
 
 
-## How Connect to Database PostgreSQL with Jupyter Lab (Spark Session)
+## Connection
+
+To connect to the PostgreSQL database via JupyterLab, you need the IP address of the PostgreSQL Container, you can get it by following this step:
+
+```bash
+docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' postgresql
+```

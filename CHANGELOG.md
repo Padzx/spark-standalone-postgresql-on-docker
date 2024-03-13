@@ -91,3 +91,15 @@
 - Built and tagged the PostgreSQL image clusters with the latest version.
 
 - Pushed the tagged image to the Docker Hub Repository.
+
+# [1.1.0] - 2024-03-13
+
+## Added
+
+- Building Image JupyterLab
+
+## Details 
+
+- Updated Image JupyterLab Image
+
+- Insert Tutorial About, How Testing Connection of Clusters Spark and connection wit PostgreSQL Database  
