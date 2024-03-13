@@ -32,6 +32,9 @@ COPY --from=padzx/spark-master:latest /usr/bin/spark /usr/local/spark
 # Create Python kernel for PySpark
 RUN python3 -m ipykernel install --user --name=python3 --display-name="PySpark"
 
+# Copy pyspark.ipynb to the desired directory 
+COPY build/workspace/pyspark.ipynb /app/pyspark.ipynb
+
 # Expose JupyterLab port
 EXPOSE 8888
 

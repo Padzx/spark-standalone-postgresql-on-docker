@@ -2,7 +2,7 @@ name: Publish JupyterLab Image
 
 on:
   push:
-    branches-ignore:
+    branches:
       - main
   release:
     types: [published]
