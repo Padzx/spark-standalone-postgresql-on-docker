@@ -4,9 +4,8 @@
 
 1. Create an [issue](https://github.com/Padzx/spark-standalone-postgresql-on-docker/issues) to dicuss features and bugs.
 
-2. Fork the project.
-
-3. Create your feature branch, we use [git](https://github.com/git/git).
+2. Fork the project;
+3. Create your feature branch, we use [git](https://github.com/git/git);
 
 4. Make changes 🤖;
 
